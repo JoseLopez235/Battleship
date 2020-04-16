@@ -4,7 +4,7 @@ require_relative "../lib/ship.rb"
 describe Ship do
   let(:ship) {Ship.new("cruiser", 3)}
   it "should exist" do
-    expect(Ship.new("cruiser", 3)).to be_kind_of(Ship)
+    expect(ship).to be_kind_of(Ship)
   end
 
   it "should return ship name" do
