@@ -4,6 +4,7 @@ require_relative "../lib/ship.rb"
 
 describe Cell do
   let(:cell) {Cell.new("B4")}
+  let(:ship) {Ship.new("cruiser", 3)}
   it "should exist" do
     expect(cell).to be_kind_of(Cell)
   end
@@ -24,9 +25,18 @@ describe Cell do
     expect(cell.empty?).to eq(true)
   end
 
-  it "should return place of ship" do
-    ship = Ship.new("cruiser", 3)
+  it "should return true if the cell is fired upon" do
+    expect(cell.fire_upon).to eq(true)
+  end
 
+  it "should return place of ship" do
     expect(cell.place_ship(ship)).to eq(cell.ship)
+  end
+
+  it "should return the current ship health -1" do
+    cell.place_ship(ship)
+    cell.fire_upon
+
+    expect(ship.health).to eq(2)
   end
 end

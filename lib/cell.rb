@@ -24,6 +24,15 @@ class Cell
     @fired_upon_bool
   end
 
+  def fire_upon
+    if fired_upon? == false && empty? == false
+      @fired_upon_bool = true
+      @ship.hit
+    elsif fired_upon? == false && empty? == true
+      @fired_upon_bool = true
+    end
+  end
+
   def place_ship(ship)
     @ship = ship
   end
