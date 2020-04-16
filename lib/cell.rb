@@ -4,7 +4,20 @@ class Cell
   attr_reader :coordinate
   def initialize(coordinate)
     @coordinate = coordinate
+    @ship = nil
     @fired_upon_bool = false
+  end
+
+  def ship
+    @ship
+  end
+
+  def empty?
+    if @ship == nil
+      return true
+    else
+      return false
+    end
   end
 
   def fired_upon?
