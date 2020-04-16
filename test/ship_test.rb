@@ -22,4 +22,11 @@ describe Ship do
   it "should return true or false if sunk" do
     expect(ship.sunk?).to be(false)
   end
+
+  it "should return new health of ship once it's been hit" do
+      ship.hit
+      ship.hit
+      ship.hit
+      expect(ship.health).to eq(0)
+    end
 end
