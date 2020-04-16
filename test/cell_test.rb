@@ -10,4 +10,5 @@ describe Cell do
   it "should return the coordinate for the cell" do
     expect(cell.coordinate).to eq("B4")
   end
+
 end
