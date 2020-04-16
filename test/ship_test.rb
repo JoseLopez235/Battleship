@@ -14,4 +14,8 @@ describe Ship do
   it "should return length of ship" do
     expect(ship.length).to eq(3)
   end
+
+  it "should return the ship health" do
+    expect(ship.health).to be(3)
+  end
 end
