@@ -10,4 +10,12 @@ class Ship
   def health
     @health
   end
+
+  def sunk?
+    if health == 0
+      return true
+    else
+      return false
+    end
+  end
 end
