@@ -15,4 +15,7 @@ describe Cell do
     expect(cell.coordinate).to eq("B4")
   end
 
+  it "should return true if cell is empty" do
+    expect(cell.empty?).to eq(true)
+  end
 end

@@ -6,6 +6,14 @@ class Cell
   end
 
   def ship
-    return @ship
+    @ship
+  end
+
+  def empty?
+    if @ship == nil
+      return true
+    else
+      return false
+    end
   end
 end
