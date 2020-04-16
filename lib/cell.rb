@@ -3,8 +3,4 @@ class Cell
   def initialize(coordinate)
     @coordinate = coordinate
   end
-
-  def coordinate
-  @coordinate
-  end
 end
