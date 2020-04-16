@@ -7,6 +7,10 @@ describe Cell do
     expect(cell).to be_kind_of(Cell)
   end
 
+  it "should return ship's coordinate" do
+    expect(cell.ship).to eq(nil)
+  end
+  
   it "should return the coordinate for the cell" do
     expect(cell.coordinate).to eq("B4")
   end
