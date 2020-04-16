@@ -16,6 +16,6 @@ describe Ship do
   end
 
   it "should return the ship health" do
-    expect(Ship.new("cruiser", 3).health).to be(3)
+    expect(ship.health).to be(3)
   end
 end
