@@ -28,6 +28,8 @@ class Cell
     if fired_upon? == false && empty? == false
       @fired_upon_bool = true
       @ship.hit
+    elsif fired_upon? == false && empty? == true
+      @fired_upon_bool = true
     end
   end
 
