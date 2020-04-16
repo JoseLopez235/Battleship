@@ -1,5 +1,6 @@
 require "rspec/autorun"
 require_relative "../lib/cell.rb"
+require_relative "../lib/ship.rb"
 
 describe Cell do
   let(:cell) {Cell.new("B4")}
@@ -21,5 +22,11 @@ describe Cell do
 
   it "should return true if cell is empty" do
     expect(cell.empty?).to eq(true)
+  end
+
+  it "should return place of ship" do
+    ship = Ship.new("cruiser", 3)
+
+    expect(cell.place_ship(ship)).to eq(cell.ship)
   end
 end

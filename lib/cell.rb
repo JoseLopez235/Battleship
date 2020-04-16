@@ -23,4 +23,8 @@ class Cell
   def fired_upon?
     @fired_upon_bool
   end
+
+  def place_ship(ship)
+    @ship = ship
+  end
 end
