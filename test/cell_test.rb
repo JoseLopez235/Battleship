@@ -11,4 +11,7 @@ describe Cell do
     expect(cell.coordinate).to eq("B4")
   end
 
+  it "should return true if ship got hit and false if not" do
+    expect(cell.fired_upon?).to eq(false)
+  end
 end
