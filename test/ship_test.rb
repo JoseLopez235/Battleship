@@ -18,4 +18,8 @@ describe Ship do
   it "should return the ship health" do
     expect(ship.health).to be(3)
   end
+
+  it "should return true or false if sunk" do
+    expect(ship.sunk?).to be(false)
+  end
 end
