@@ -22,4 +22,8 @@ describe Cell do
   it "should return true if cell is empty" do
     expect(cell.empty?).to eq(true)
   end
+
+  it "should return true if the cell is fired upon" do
+    expect(cell.fire_upon).to eq(true)
+  end
 end

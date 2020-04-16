@@ -23,4 +23,9 @@ class Cell
   def fired_upon?
     @fired_upon_bool
   end
+
+  def fire_upon
+
+    end
+  end
 end
