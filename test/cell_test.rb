@@ -10,9 +10,13 @@ describe Cell do
   it "should return ship's coordinate" do
     expect(cell.ship).to eq(nil)
   end
-  
+
   it "should return the coordinate for the cell" do
     expect(cell.coordinate).to eq("B4")
+  end
+
+  it "should return true if ship got hit and false if not" do
+    expect(cell.fired_upon?).to eq(false)
   end
 
   it "should return true if cell is empty" do

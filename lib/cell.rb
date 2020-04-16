@@ -1,8 +1,11 @@
+require_relative 'ship.rb'
+
 class Cell
   attr_reader :coordinate
   def initialize(coordinate)
     @coordinate = coordinate
     @ship = nil
+    @fired_upon_bool = false
   end
 
   def ship
@@ -15,5 +18,9 @@ class Cell
     else
       return false
     end
+  end
+
+  def fired_upon?
+    @fired_upon_bool
   end
 end
