@@ -3,4 +3,8 @@ class Board
   def initialize
     @cells = {}
   end
+
+  def valid_coordinate?(coord)
+    @cells.include?(coord)
+  end
 end
