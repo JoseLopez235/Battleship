@@ -39,4 +39,15 @@ describe Cell do
 
     expect(ship.health).to eq(2)
   end
+
+  it "should return a string representation if ship has been fired upon." do
+    cell.place_ship(ship)
+    cell.fire_upon
+
+    expect(cell.render).to eq(".")
+    expect(cell.render).to eq("M")
+    expect(cell.render).to eq("H")
+    expect(cell.render).to eq("X")
+    expect(cell.render(true)).to eq("S")
+  end
 end
