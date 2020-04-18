@@ -1,9 +1,29 @@
 require_relative 'ship.rb'
+require_relative 'cell.rb'
 
 class Board
   attr_accessor :cells
-  def initialize()
+  def initialize(board_size=4)
     @cells = {}
+    @board_size = board_size.to_i
+  end
+
+  def board_size
+    last_letter = "A"
+    (@board_size - 1).times {last_letter.next!}
+    letters = ("A"..last_letter)
+    numbers = ("1"..@board_size.to_s)
+    new_array = []
+
+    letters.map do |ele|
+      numbers.map do |ele_two|
+        new_array << ele + ele_two
+      end
+    end
+
+    new_array.each do |ele|
+      @cells[ele] = Cell.new(ele)
+    end
   end
 
   def valid_coordinate?(coord)
