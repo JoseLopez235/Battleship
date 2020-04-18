@@ -14,7 +14,7 @@ describe Board do
     expect(board.cells).to eq({})
   end
 
-  xit "should return true if a cell is on the board" do
+  it "should return true if a cell is on the board" do
     expect(board.valid_coordinate?("A1")).to eq (true)
     expect(board.valid_coordinate?("A222")).to eq (false)
   end
