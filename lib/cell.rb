@@ -6,6 +6,7 @@ class Cell
     @coordinate = coordinate
     @ship = nil
     @fired_upon_bool = false
+    @render = "."
   end
 
   def ship
@@ -35,5 +36,13 @@ class Cell
 
   def place_ship(ship)
     @ship = ship
+  end
+
+  def render(show_ship=false)
+    return "S" if ship && show_ship
+    return "X" if ship && ship.sunk?
+    return "H" if ship && fired_upon?
+    return "M" if fired_upon?
+    return "."
   end
 end
