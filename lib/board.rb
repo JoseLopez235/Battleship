@@ -2,8 +2,12 @@ require_relative 'ship.rb'
 
 class Board
   attr_accessor :cells
-  def initialize
+  def initialize()
     @cells = {}
+  end
+
+  def valid_coordinate?(coord)
+   @cells.include?(coord)
   end
 
   def valid_placement?(ship, coords)
