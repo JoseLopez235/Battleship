@@ -15,6 +15,7 @@ describe Board do
   end
 
   it "should return true if a cell is on the board" do
+<<<<<<< HEAD
     expect(board.valid_coordinate?("A1")).to eq(true)
     expect(board.valid_coordinate?("A222")).to eq(false)
   end
@@ -26,6 +27,10 @@ describe Board do
     expect(board.cells["A1"]).to eq(cruiser)
     expect(board.cells["A2"]).to eq(cruiser)
     expect(board.cells["A3"]).to eq(cruiser)
+=======
+    expect(board.valid_coordinate?("A1")).to eq (true)
+    expect(board.valid_coordinate?("A222")).to eq (false)
+>>>>>>> 3e19a390c6ed2a516b965ab1a8c64b48879abac4
   end
 
   it "should return true if the placements are valid" do

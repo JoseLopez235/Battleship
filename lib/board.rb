@@ -3,8 +3,17 @@ require_relative 'cell.rb'
 
 class Board
   attr_accessor :cells
+<<<<<<< HEAD
   def initialize
     @cells = {"A1" => "A1", "A2" => "A2", "A3" => "A3"}
+=======
+  def initialize()
+    @cells = {}
+>>>>>>> 3e19a390c6ed2a516b965ab1a8c64b48879abac4
+  end
+
+  def valid_coordinate?(coord)
+   @cells.include?(coord)
   end
 
   def valid_placement?(ship, coords)
