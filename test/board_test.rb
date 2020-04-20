@@ -15,12 +15,6 @@ describe Board do
     expect(board.cells).to eq({})
   end
 
-  it "should return true if a cell is on the board" do
-<<<<<<< HEAD
-    expect(board.valid_coordinate?("A1")).to eq(true)
-    expect(board.valid_coordinate?("A222")).to eq(false)
-  end
-
   it "should return the ship in the cell" do
     cruiser = Ship.new("Cruiser", 3)
     board.place(cruiser, ["A1", "A2", "A3"])
@@ -28,10 +22,11 @@ describe Board do
     expect(board.cells["A1"]).to eq(cruiser)
     expect(board.cells["A2"]).to eq(cruiser)
     expect(board.cells["A3"]).to eq(cruiser)
-=======
+  end
+
+  it "should return true if a cell is on the board" do
     board.board_size
 
->>>>>>> 1a6574282ad32d5e2803780bd1d7f4ffb7574e91
     expect(board.valid_coordinate?("A1")).to eq (true)
     expect(board.valid_coordinate?("A222")).to eq (false)
   end

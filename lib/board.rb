@@ -56,12 +56,12 @@ class Board
   end
 
   def place(ship,coords)
-    if valid_placement?
+    variable_num = 1
+    if valid_placement?(ship,coords)
       coords.each do |ele|
-        @cells[ele] = ship
+        @cells[ele].ship = ele
       end
-    else
-      puts "placement not valid"
     end
+
   end
 end
