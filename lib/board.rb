@@ -6,9 +6,10 @@ class Board
   def initialize(board_size=4)
     @cells = {}
     @board_size = board_size.to_i
+    board
   end
 
-  def board_size
+  def board
     last_letter = "A"
     (@board_size - 1).times {last_letter.next!}
     letters = ("A"..last_letter)
