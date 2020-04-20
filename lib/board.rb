@@ -32,8 +32,12 @@ class Board
   end
 
   def valid_placement?(ship, coords)
-    if  coords.length == ship.length && vertically?(coords) || horizontally?(coords)
-      return true
+    coords.each do |ele|
+      if @cells[ele].empty?
+        if coords.length == ship.length && vertically?(coords) || horizontally?(coords)
+          return true
+        end
+      end
     end
     return false
   end
@@ -54,5 +58,9 @@ class Board
       valid_coords << valid_coords[-1][0].next + first_ele[1]
     end
     return valid_coords == sorted_coords
+  end
+
+  def place(ship,coords)
+      coords.each {|ele| @cells[ele] = Cell.new(ele, ship)}
   end
 end

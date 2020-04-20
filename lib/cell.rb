@@ -2,9 +2,9 @@ require_relative 'ship.rb'
 
 class Cell
   attr_reader :coordinate
-  def initialize(coordinate)
+  def initialize(coordinate, ship = nil)
     @coordinate = coordinate
-    @ship = nil
+    @ship = ship
     @fired_upon_bool = false
     @render = "."
   end
