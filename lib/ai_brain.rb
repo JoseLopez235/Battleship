@@ -4,7 +4,7 @@ require_relative 'ship.rb'
 class ArtificialIntelligence
   attr_accessor :hunt
   def initialize
-    @hunt = Cell.new("B2", Ship.new("cruiser", 3))
+    @hunt = nil
     @surroundcells = []
   end
 
