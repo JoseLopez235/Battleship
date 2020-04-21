@@ -17,4 +17,9 @@ describe ArtificialIntelligence do
     expect(board.cells.value?(ai.hunt)).to eq(true)
   end
 
+  it "should return the adjacent cells if ship hit" do
+    board.board
+
+    expect(ai.adjacent_cells(board)).to eq([board.cells["A2"], board.cells["C2"], board.cells["B1"], board.cells["B3"]])
+  end
 end
