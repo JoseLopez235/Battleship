@@ -7,6 +7,7 @@ class Board
     @cells = {}
     @board_size = board_size.to_i
     board
+
   end
 
   def board
@@ -62,5 +63,10 @@ class Board
 
   def place(ship,coords)
       coords.each {|ele| @cells[ele] = Cell.new(ele, ship)}
+  end
+
+
+  def render(show_ship=false)
+    return "FERNANDO DO THIS!!!"
   end
 end

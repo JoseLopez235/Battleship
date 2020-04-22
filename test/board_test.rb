@@ -49,4 +49,17 @@ describe Board do
     expect(cell_3.ship).to be_kind_of(Ship)
     expect(cell_1.ship).to eq(cell_3.ship)
   end
+
+  it "should return board values." do
+    board.place(ship,["A1", "A2", "A3"])
+    expect(board.render).to eq("FERNANDO DO THIS!!!")
+    # expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+  end
+
+  it "should return a string representation of S to show ships" do
+    board.place(ship,["A1", "A2", "A3"])
+
+    expect(board.render(true)).not_to eq("Kevin DO THIS!!!")
+
+  end
 end
