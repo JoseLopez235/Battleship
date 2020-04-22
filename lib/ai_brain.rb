@@ -1,22 +1,30 @@
+=begin
+  Need to finish fixing hunt_cells and finsih logical strike
+=end
+
 require_relative 'board.rb'
 require_relative 'ship.rb'
+require_relative 'cell.rb'
 
 class ArtificialIntelligence
   attr_accessor :hunt
   def initialize
     @hunt = nil
     @surroundcells = []
+    @ship_cells = []
   end
 
   def hunt_cell(cells)
     values = cells.values
-    @hunt = values[rand(values.size)]
+    random_cell = values[rand(values.size)]
+    random_cell.fire_upon
+    @hunt = random_cell if !random_cell.empty?
   end
 
   def adjacent_cells(cells)
     if !@hunt.empty?
-      get_vertical(cells)
-      get_horizontal(cells)
+      @surroundcells << get_vertical(cells)
+      @surroundcells << get_horizontal(cells)
     end
     return @surroundcells
   end
@@ -36,4 +44,14 @@ class ArtificialIntelligence
     @surroundcells << cells.cells[left] if cells.valid_coordinate?(left)
     @surroundcells << cells.cells[right] if cells.valid_coordinate?(right)
   end
+
+  # def logical_strike(cells)
+  #   @surroundcells.map do |ele|
+  #     ele.fire_upon
+  #     if !ele.empty?
+  #       @ship_cells << ele
+  #     end
+  #   end
+  #   return @ship_cells
+  # end
 end
