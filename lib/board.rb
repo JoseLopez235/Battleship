@@ -65,8 +65,21 @@ class Board
       coords.each {|ele| @cells[ele] = Cell.new(ele, ship)}
   end
 
-
-  def render(show_ship=false)
-    return "FERNANDO DO THIS!!!"
+  def board_render(cells, show_ship=false, count=0)
+    last_letter = "A"
+    (@board_size - 1).times {last_letter.next!}
+    letters = ("A"..last_letter).to_a
+    numbers = ("1"..@board_size.to_s).to_a
+    return board = """
+      #{puts "  " + numbers.map {|ele| ele}.join(" ")}
+      #{letters.map do |ele|
+          print ele
+          @board_size.times do
+            print " " + @cells[((ele + ("#{count +=1 }")))].render(show_ship)
+          end
+          puts "\n"
+          count = 0
+        end}}
+    """
   end
 end
