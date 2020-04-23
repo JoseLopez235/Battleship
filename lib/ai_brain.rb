@@ -1,16 +1,28 @@
 require_relative 'board.rb'
 require_relative 'ship.rb'
+require_relative 'cell.rb'
 
 class ArtificialIntelligence
-  attr_accessor :hunt
-  def initialize
+  attr_accessor :hunt, :unused_cells
+  def initialize(cells)
     @hunt = nil
     @surroundcells = []
+    @unused_cells = cells.dup
   end
 
-  def hunt_cell(cells)
-    values = cells.values
-    @hunt = values[rand(values.size)]
+  def hunt_cell
+    values = @unused_cells.values
+    random_code = values[rand(values.size)]
+    random_code.fire_upon
+
+    @unused_cells.delete(random_code.coordinate)
+
+    if !random_code.empty?
+      @hunt = random_code
+      return true
+    else
+      return false
+    end
   end
 
   def adjacent_cells(cells)
