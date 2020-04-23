@@ -51,15 +51,16 @@ describe Board do
   end
 
   it "should return board values." do
+    board.board
     board.place(ship,["A1", "A2", "A3"])
-    expect(board.render).to eq("FERNANDO DO THIS!!!")
-    # expect(board.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+
+    expect(board.board_render(board.cells)).to eq("\n      \n      [0, 0, 0, 0]}\n    ")
   end
 
   it "should return a string representation of S to show ships" do
+    board.board
     board.place(ship,["A1", "A2", "A3"])
 
-    expect(board.render(true)).not_to eq("Kevin DO THIS!!!")
-
+    expect(board.board_render(board.cells, true)).to eq("\n      \n      [0, 0, 0, 0]}\n    ")
   end
 end
