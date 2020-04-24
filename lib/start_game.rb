@@ -68,9 +68,6 @@ class StartGame
 
 
   def player_turn
-    # prompt input and validated immediately
-    # not valid call player_turn again
-    # valid hit
     attack_coord = gets.chomp
     validate_hit?(attack_coord) ? player_attack(attack_coord) : player_turn
   end
@@ -82,9 +79,12 @@ class StartGame
     # if hasnt won call ai_turn
   end
 
-  def display_info(cell)
-    # check miss or hit
-    # check if sunk?
+  def player_display_info(cell)
+    return @player.cells[cell].render
+  end
+
+  def ai_display_info(cell)
+    return @ai.cells[cell].render
   end
 
   def ai_turn
