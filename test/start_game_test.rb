@@ -31,7 +31,7 @@ describe StartGame do
     expect(start_game.player.cells["A3"].ship).to eq(ship_one)
   end
 
-  it "should return true if coord is valid and not been fired upon" do
+  xit "should return true if coord is valid and not been fired upon" do
     start_game.player.cells["A1"].place_ship(ship_one)
     start_game.player.cells["B1"].place_ship(ship_one)
     start_game.player.cells["A1"].fire_upon
@@ -45,7 +45,7 @@ describe StartGame do
     expect(start_game.validate_hit?("Z1")).to eq(false)
   end
 
-  it "should call player_ship_placement" do
+  xit "should call player_ship_placement" do
     allow(start_game).to receive(:gets) { "A1 A2 A3" }
     expect(start_game).to receive(:player_ship_placement).with(ship_one, ["A1", "A2", "A3"])
     start_game.player_ship_input(ship_one)
@@ -56,5 +56,12 @@ describe StartGame do
 
     expect(start_game.player.cells["A1"].ship).to be_kind_of(Ship)
     expect(start_game.player.cells["A2"].ship).to be_kind_of(Ship)
+  end
+
+  it "should return cell with a hit if valid" do
+    allow(start_game).to receive(:gets) {"A1"}
+    start_game.player_turn
+
+    expect(start_game.player.cells["A1"].fired_upon?).to eq(true)
   end
 end
