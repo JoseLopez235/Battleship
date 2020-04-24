@@ -40,7 +40,6 @@ describe StartGame do
     start_game.ai.cells["B1"].place_ship(ship_one)
     start_game.ai.cells["A1"].fire_upon
 
-    # expect(cell.fired_upon?).to eq(true)
     expect(start_game.validate_hit?("A1")).to eq(false)
     expect(start_game.validate_hit?("B1")).to eq(true)
     expect(start_game.validate_hit?("Z1")).to eq(false)
