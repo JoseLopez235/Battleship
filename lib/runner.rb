@@ -1,13 +1,59 @@
+require_relative "board.rb"
 class Runner
 
-  attr_reader :play, :board_size, :ships
+  attr_reader :play, :board_size, :ships, :board
   def initialize()
-    @length_valid = false
-    @ships = []
-    @play = false
+    @board = nil
     @board_choice = nil
+    @length_valid = false
+    @used_coords = []
+    @ships = []
+    @coords = []
+    @play = false
     @board_size = 4
     main_menu
+    player_place_ship
+    @board.board_render(@board.cells, true)
+  end
+
+  def player_place_ship
+    @ships.each do |ele|
+      valid_coords_loop = false
+      puts "Enter #{ele.length} coordinates to enter #{ele.name}"
+      @board.board_render(@board.cells, true)
+      valid_user_coords(ele.length)
+
+     while !valid_coords_loop do
+       if @board.valid_placement?(ele, @coords)
+        @board.place(ele, @coords)
+        valid_coords_loop = true
+        @coords.clear
+       else
+        puts "Invalid placement try different coords"
+        @used_coords -= @coords
+        @coords.clear
+        valid_user_coords(ele.length)
+        valid_coords_loop = true if @board.valid_placement?(ele, @coords)
+       end
+     end
+    end
+  end
+
+  def valid_user_coords(ship_length)
+    ship = ship_length
+    ship.times do
+      puts "Enter a valid coordinate"
+      coord = gets.chomp.upcase
+      if !@used_coords.include?(coord) && @board.valid_coordinate?(coord)
+        @coords << coord
+        @used_coords << coord
+      else
+        puts "try again"
+        @coords.clear
+        @used_coords.delete(coord)
+        valid_user_coords((ship-1))
+      end
+    end
   end
 
   def main_menu
@@ -31,7 +77,7 @@ class Runner
       puts "what length will it be?"
       length = gets.chomp.to_i
 
-      while !@length_valid
+      while !@length_valid do
         if valid_length?(length)
           @ships << Ship.new(name, length)
         else
@@ -45,9 +91,9 @@ class Runner
 
   def  valid_length?(length)
     if @board_choice == 1
-      @length_valid = true if length <= 3 && 0 < length
+      @length_valid = true if length <= 3 && 2 <= length
     else
-      @length_valid = true if length <= @board_choice + 1 && 0 < length
+      @length_valid = true if length <= @board_choice + 1 && 2 <= length
     end
   end
 
@@ -58,6 +104,7 @@ class Runner
       num += 2
     end
     @board_size = num
+    @board = Board.new(@board_size)
     return @board_size
   end
 
