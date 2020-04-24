@@ -41,7 +41,7 @@ class StartGame
 
   def player_ship_input(ship)
     coords = gets.chomp.split(" ")
-    if valid_sequence?(coords)
+    if valid_sequence?(ship, coords)
       player_ship_placement(ship, coords)
     else
       puts "Those are invalid coordinates. Please try again:"
@@ -53,9 +53,15 @@ class StartGame
     coords.each { |coord| @player.cells[coord].place_ship(ship) }
   end
 
-  def valid_sequence?(ship)
-    return true
+  def valid_sequence?(ship, coords)
+    valid = false
+    coords.sort
+    coords.each do |ele|
+      valid = @player.cells.include?(ele) && @player.valid_placement?(ship, coords)
+    end
+    return valid
   end
+
 
   def player_turn
     # prompt input and validated immediately
