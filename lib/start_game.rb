@@ -1,4 +1,3 @@
-require 'pry'
 require_relative "board.rb"
 require_relative "ship.rb"
 
@@ -87,8 +86,9 @@ class StartGame
   end
 
   def validate_hit?(coord)
+    player = @player.cells[coord]
+    ai = @ai.cells[coord]
     return false if !@ai.cells.include?(coord) || !@player.cells.include?(coord)
-    return @player.cells[coord].fired_upon? ? false : true
-    return @ai.cells[coord].fired_upon? ? false : true
+    return player.fired_upon? || ai.fired_upon? ? false : true
   end
 end
