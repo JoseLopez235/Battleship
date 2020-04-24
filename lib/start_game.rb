@@ -93,7 +93,9 @@ class StartGame
   end
 
   def validate_hit?(coord)
-    # validates coord
+    player = @player.cells[coord]
+    ai = @ai.cells[coord]
+    return false if !@ai.cells.include?(coord) || !@player.cells.include?(coord)
+    return player.fired_upon? || ai.fired_upon? ? false : true
   end
-
 end
