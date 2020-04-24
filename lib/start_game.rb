@@ -13,8 +13,20 @@ class StartGame
   end
 
   def main_menu
-  
-  end
+    puts "Welcome to BATTLESHIP"
+      user = nil
+       loop do
+         puts "Enter p to play. Enter q to quit."
+         user = gets.chomp
+         break if user == "q" || user == "p"
+       end
+       exit if user == "q"
+       if user == "p"
+         computer_ship_place
+         player_ship_prompt
+       end
+
+   end
 
 
   def computer_ship_place
