@@ -40,10 +40,13 @@ class StartGame
   end
 
   def player_ship_input(ship)
-    # ship => Ship class
-    # gets input
-    # if valid calls player_ship_placement
-    # not valid calls player_ship_input(ship)
+    coords = gets.chomp.split(" ")
+    if valid_sequence?(ship, coords)
+      player_ship_placement(ship, coords)
+    else
+      puts "Those are invalid coordinates. Please try again:"
+      player_ship_input(ship)
+    end
   end
 
   def player_ship_placement(ship, coords)
