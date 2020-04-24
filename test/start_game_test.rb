@@ -14,4 +14,9 @@ describe StartGame do
     expect(start_game.generate_ships[0]).to be_kind_of(Ship)
     expect(start_game.generate_ships[1]).to be_kind_of(Ship)
   end
+
+  it "should return true if coord is valid" do
+    expect(start_game.valid_sequence?("A1")).to eq(true)
+    expect(start_game.valid_sequence?("Z9")).to eq(false)
+  end
 end
