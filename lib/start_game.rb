@@ -2,6 +2,7 @@ require_relative "board.rb"
 require_relative "ship.rb"
 
 class StartGame
+  attr_accessor :player, :ai
   def initialize()
     @player = Board.new
     @ai = Board.new
@@ -45,8 +46,8 @@ class StartGame
     # not valid calls player_ship_input(ship)
   end
 
-  def player_ship_placement
-    # actually creating the ship class and saving it in the board
+  def player_ship_placement(ship, coords)
+    coords.each { |coord| @player.cells[coord].place_ship(ship) }
   end
 
   def valid_sequence?(ship, coords)
