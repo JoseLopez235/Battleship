@@ -1,6 +1,8 @@
 require "rspec/autorun"
 require_relative "../lib/start_game.rb"
 require_relative "../lib/ship.rb"
+require_relative "../lib/cell.rb"
+require_relative "../lib/board.rb"
 
 describe StartGame do
   let(:start_game) {StartGame.new}
@@ -29,4 +31,18 @@ describe StartGame do
     expect(start_game.player.cells["A3"].ship).to eq(ship_one)
   end
 
+  it "should return true if coord is valid and not been fired upon" do
+    start_game.player.cells["A1"].place_ship(ship_one)
+    start_game.player.cells["B1"].place_ship(ship_one)
+    start_game.player.cells["A1"].fire_upon
+
+    start_game.ai.cells["A1"].place_ship(ship_one)
+    start_game.ai.cells["B1"].place_ship(ship_one)
+    start_game.ai.cells["A1"].fire_upon
+
+    # expect(cell.fired_upon?).to eq(true)
+    expect(start_game.validate_hit?("A1")).to eq(false)
+    expect(start_game.validate_hit?("B1")).to eq(true)
+    expect(start_game.validate_hit?("Z1")).to eq(false)
+  end
 end
