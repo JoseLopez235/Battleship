@@ -16,6 +16,11 @@ describe StartGame do
     expect(start_game.generate_ships[1]).to be_kind_of(Ship)
   end
 
+  it "should return true if coord is valid" do
+    expect(start_game.valid_sequence?(ship_one, ["A1", "A2", "A3"])).to eq(true)
+    expect(start_game.valid_sequence?(ship_one, ["Z1", "Z2", "Z3"])).to eq(false)
+  end
+
   it "should return a ship in a cell" do
     start_game.player_ship_placement(ship_one, ["A1", "A2", "A3"])
 

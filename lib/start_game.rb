@@ -50,10 +50,15 @@ class StartGame
     coords.each { |coord| @player.cells[coord].place_ship(ship) }
   end
 
-  def valid_sequence?
-    # might take an argument
-    #return true if not valid
+  def valid_sequence?(ship, coords)
+    valid = false
+    coords.sort
+    coords.each do |ele|
+      valid = @player.cells.include?(ele) && @player.valid_placement?(ship, coords)
+    end
+    return valid
   end
+
 
   def player_turn
     # prompt input and validated immediately
