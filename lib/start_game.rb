@@ -25,17 +25,21 @@ class StartGame
   end
 
   def player_ship_prompt
-    # welcome message
-    # calls generate_ships
-    # loop of the generate_ships to go in player ship input
-    # calls player_ship_input
-    # player or ai board
-    # turn(player)
+    puts "\nI have laid out my ships on the grid.\nYou now need to lay out your two ships."
+    puts "The Cruiser is three units long and the Submarine is two units long."
+    generate_ships.each do |ele|
+      puts "\nPlace the #{ele.name} which is #{ele.length} long"
+      @player.board_render(@player.cells, true)
+      player_ship_input(ele)
+      system "clear"
+    end
+    @player.board_render(@player.cells, true)
+    player_turn
   end
 
   def generate_ships(quantity=2, sizes=[2,3])
     ships = []
-    quantity.times { |i| ships << Ship.new(@name_of_ships[i], sizes[i])}
+    quantity.times { |i| ships << Ship.new(@name_of_ships[sizes[i]], sizes[i])}
     return ships
   end
 
