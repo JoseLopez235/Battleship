@@ -71,6 +71,8 @@ class StartGame
     # prompt input and validated immediately
     # not valid call player_turn again
     # valid hit
+    attack_coord = gets.chomp
+    validate_hit?(attack_coord) ? player_attack(attack_coord) : player_turn
   end
 
   def player_attack(coord)
