@@ -49,9 +49,9 @@ class StartGame
     # actually creating the ship class and saving it in the board
   end
 
-  def valid_sequence?
-    # might take an argument
-    #return true if not valid
+  def valid_sequence?(coord)
+    return @player.cells.include?(coord) ? true : false
+    return @ai.cells.include?(coord) ? true : false
   end
 
   def player_turn
