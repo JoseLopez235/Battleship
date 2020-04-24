@@ -58,10 +58,35 @@ describe StartGame do
     expect(start_game.player.cells["A2"].ship).to be_kind_of(Ship)
   end
 
-  it "should return cell with a hit if valid" do
+  xit "should return cell with a hit if valid" do
     allow(start_game).to receive(:gets) {"A1"}
     start_game.player_turn
 
     expect(start_game.player.cells["A1"].fired_upon?).to eq(true)
+  end
+
+  it "should return if the cell is a hit or miss or sunk for player" do
+    start_game.player.cells["A1"].place_ship(ship_one)
+    start_game.player.cells["A2"].place_ship(ship_one)
+    start_game.player.cells["A3"].place_ship(ship_one)
+    start_game.player.cells["A1"].fire_upon
+    start_game.player.cells["A2"].fire_upon
+    start_game.player.cells["A3"].fire_upon
+
+
+    expect(start_game.player_display_info("A1")).to eq("X")
+    expect(start_game.player_display_info("A2")).to eq("X")
+    expect(start_game.player_display_info("A3")).to eq("X")
+  end
+
+  it "should return if the cell is a hit or miss or sunk for player" do
+    start_game.ai.cells["C1"].place_ship(ship_one)
+    start_game.ai.cells["C2"].place_ship(ship_one)
+    start_game.ai.cells["C1"].fire_upon
+    start_game.ai.cells["C3"].fire_upon
+
+    expect(start_game.ai_display_info("C1")).to eq("H")
+    expect(start_game.ai_display_info("C2")).to eq(".")
+    expect(start_game.ai_display_info("C3")).to eq("M")
   end
 end
