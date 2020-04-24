@@ -1,3 +1,4 @@
+require 'pry'
 require_relative "board.rb"
 require_relative "ship.rb"
 
@@ -11,6 +12,10 @@ class StartGame
       3 => "cruiser",
     }
     main_menu
+    @player_attacks = []
+    @ai_attacks = []
+    @player_ship_counter = 0
+    @ai_ship_counter = 0
   end
 
   def main_menu
@@ -73,10 +78,16 @@ class StartGame
   end
 
   def player_attack(coord)
-    # record the attack
-    # display_info
-    # if won return you won
-    # if hasnt won call ai_turn
+    @ai.cells[coord].fire_upon
+    @player_attacks << coord
+    player_display_info(coord)
+    ship = @ai.cells[coord].ship
+    @ai_ship_counter += 1 if ship.sunk?
+    if @ai_ship_counter == generate_ships.count
+      puts "You Won!"
+    else
+      ai_turn
+    end
   end
 
   def player_display_info(cell)
@@ -98,6 +109,7 @@ class StartGame
     player = @player.cells[coord]
     ai = @ai.cells[coord]
     return false if !@ai.cells.include?(coord) || !@player.cells.include?(coord)
+    return false if @ai_attacks.include?(coord) || @player_attacks.include?(coord)
     return player.fired_upon? || ai.fired_upon? ? false : true
   end
 end
