@@ -32,9 +32,10 @@ class StartGame
     # turn(player)
   end
 
-  def generate_ships(quantity=2, sizes=3)
-    # quantity => 3, sizes => [2,3,3],
-    # creates amount of ships told
+  def generate_ships(quantity=2, sizes=[2,3])
+    ships = []
+    quantity.times { |i| ships << Ship.new(@name_of_ships[i], sizes[i])}
+    return ships
   end
 
   def player_ship_input(ship)
