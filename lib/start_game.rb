@@ -49,10 +49,15 @@ class StartGame
     # actually creating the ship class and saving it in the board
   end
 
-  def valid_sequence?(coord)
-    return @player.cells.include?(coord) ? true : false
-    return @ai.cells.include?(coord) ? true : false
+  def valid_sequence?(ship, coords)
+    valid = false
+    coords.sort
+    coords.each do |ele|
+      valid = @player.cells.include?(ele) && @player.valid_placement?(ship, coords)
+    end
+    return valid
   end
+
 
   def player_turn
     # prompt input and validated immediately

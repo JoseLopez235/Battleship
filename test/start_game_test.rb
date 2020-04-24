@@ -16,7 +16,7 @@ describe StartGame do
   end
 
   it "should return true if coord is valid" do
-    expect(start_game.valid_sequence?("A1")).to eq(true)
-    expect(start_game.valid_sequence?("Z9")).to eq(false)
+    expect(start_game.valid_sequence?(["A1", "A2", "A3"])).to eq(true)
+    expect(start_game.valid_sequence?(["Z1", "Z2", "Z3"])).to eq(false)
   end
 end
