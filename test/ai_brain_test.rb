@@ -22,7 +22,7 @@ describe ArtificialIntelligence do
 
     expect(ai.hunt).to eq(board.cells["A1"])
     expect(ai.unused_cells.key?("A1")).to eq(false)
-    expect(ai.hunt_cell).to eq(true)
+    expect(ai.hunt_cell).to eq(false)
   end
 
   it "should return the adjacent cells if ship hit" do
@@ -30,5 +30,16 @@ describe ArtificialIntelligence do
     ai.hunt = Cell.new("B2", ship)
 
     expect(ai.adjacent_cells(board)).to eq([board.cells["A2"], board.cells["C2"], board.cells["B1"], board.cells["B3"]])
+  end
+
+  it "should hit adjacent cells to destroy ship" do
+    board.board
+    board.place(ship, ["A1","A2","A3"])
+    allow(ai).to receive(:rand) { 0 }
+    ai.hunt_cell
+    ai.logical_strikes
+
+    expect(!ship.sunk?).to eq(true)
+
   end
 end

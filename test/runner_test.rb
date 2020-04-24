@@ -14,11 +14,16 @@ describe Runner do
     expect(runner.play).to eq(true)
   end
 
-  it "should return the board size" do
+  xit "should return the board size" do
     expect(runner.choice_conversion).to eq(4)
   end
 
   xit "should return an array with ships" do
     expect(runner.ships[0]).to be_kind_of(Ship)
+  end
+
+  it "should return a ship in a cell" do
+    runner
+    expect(runner.board.cells["A1"].ship).to be_kind_of(Ship)
   end
 end
