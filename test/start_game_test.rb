@@ -10,21 +10,6 @@ describe StartGame do
     expect(start_game).to be_kind_of(StartGame)
   end
 
-  it "should end game when user enters valid input" do
-    allow(start_game).to receive(:user_input).and_return(start_game.main_menu)
-    expect(start_game.main_menu).to output(
-      "Welcome to BATTLESHIP",
-      "Enter p to play. Enter q to quit."
-    )
-  end
-
-  it "should start game when user enters valid input." do
-    allow(start_game).to receive(:user_input).and_return("p")
-    expect(start_game.main_menu).to eq(start_game.player_ship_prompt,
-    start_game.computer_ship_place)
-
-  end
-
   xit "should return generate a ship" do
     expect(start_game.generate_ships.length).to eq(2)
     expect(start_game.generate_ships[0]).to be_kind_of(Ship)
