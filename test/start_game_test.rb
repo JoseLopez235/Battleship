@@ -24,4 +24,10 @@ describe StartGame do
     expect(start_game.player.cells["A3"].ship).to eq(ship_one)
   end
 
+  it "should call player_ship_placement" do
+    allow(start_game).to receive(:gets) { "A1 A2" }
+    expect(start_game).to receive(:player_ship_placement).with(ship_one, ["A1", "A2"])
+    start_game.player_ship_input(ship_one)
+  end
+
 end

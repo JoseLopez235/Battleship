@@ -40,19 +40,21 @@ class StartGame
   end
 
   def player_ship_input(ship)
-    # ship => Ship class
-    # gets input
-    # if valid calls player_ship_placement
-    # not valid calls player_ship_input(ship)
+    coords = gets.chomp.split(" ")
+    if valid_sequence?(coords)
+      player_ship_placement(ship, coords)
+    else
+      puts "Those are invalid coordinates. Please try again:"
+      player_ship_input(ship)
+    end
   end
 
   def player_ship_placement(ship, coords)
     coords.each { |coord| @player.cells[coord].place_ship(ship) }
   end
 
-  def valid_sequence?
-    # might take an argument
-    #return true if not valid
+  def valid_sequence?(ship)
+    return true
   end
 
   def player_turn
