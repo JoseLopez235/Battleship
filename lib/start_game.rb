@@ -10,7 +10,7 @@ class StartGame
       2 => "submarine",
       3 => "cruiser",
     }
-    #main_menu
+    main_menu
     @player_attacks = []
     @ai_attacks = []
     @player_ship_counter = 0
