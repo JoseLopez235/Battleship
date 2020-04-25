@@ -125,4 +125,11 @@ describe StartGame do
 
     expect(start_game.ai_turn).to eq("I Won!")
   end
+
+  it "should place ships into valid cells on the board" do
+    allow(start_game).to receive(:rand) {6}
+    start_game.computer_ship_place
+
+    expect(start_game.ai.cells["B2"].ship).to be_kind_of(Ship)
+  end
 end
