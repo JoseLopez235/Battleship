@@ -88,8 +88,7 @@ class StartGame
     @ai.cells[coord].fire_upon
     @player_attacks << coord
     player_display_info(coord)
-    ship = @ai.cells[coord].ship
-    @ai_ship_counter += 1 if ship.sunk?
+    @ai_ship_counter += 1 if @ai.cells[coord].ship.sunk?
     if @ai_ship_counter == generate_ships.count
       puts "You Won!"
     else
@@ -106,10 +105,17 @@ class StartGame
   end
 
   def ai_turn
-    # record the attack
-    # display_info
-    # if won return you won
-    # if hasnt won call player_turn
+    values = @player.cells.values
+    coord = values[rand(values.size)].coordinate
+    @player.cells[coord].fire_upon
+    @ai_attacks << coord
+    ai_display_info(coord)
+    @player_ship_counter += 1 if @player.cells[coord].ship.sunk?
+    if @player_ship_counter == generate_ships.count
+      puts "I Won!"
+    else
+      player_turn
+    end
   end
 
   def validate_hit?(coord)

@@ -12,18 +12,18 @@ describe StartGame do
     expect(start_game).to be_kind_of(StartGame)
   end
 
-  it "should end game when user enters valid input" do
+  xit "should end game when user enters valid input" do
     allow(start_game).to receive(:gets) {"q"}
 
     expect(start_game.main_menu).to eq(main_menu)
   end
 
-  it "should start game when user enters valid input." do
+  xit "should start game when user enters valid input." do
     allow(start_game).to receive(:gets) {"p"}
 
     expect(start_game.main_menu).to eq(computer_ship_place, player_ship_prompt)
   end
-  
+
   xit "should return generate a ship" do
     expect(start_game.generate_ships.length).to eq(2)
     expect(start_game.generate_ships[0]).to be_kind_of(Ship)
@@ -112,5 +112,17 @@ describe StartGame do
     start_game.ai.cells["B2"].fire_upon
 
     expect(start_game.player_attack("B3")).to eq("You Won!")
+  end
+
+  xit "should return I won if game has won" do
+    start_game.player
+    allow(start_game).to receive(:rand) {6}
+    start_game.player.cells["B1"].place_ship(ship_one)
+    start_game.player.cells["B2"].place_ship(ship_one)
+    start_game.player.cells["B3"].place_ship(ship_one)
+    start_game.player.cells["B1"].fire_upon
+    start_game.player.cells["B2"].fire_upon
+
+    expect(start_game.ai_turn).to eq("I Won!")
   end
 end
