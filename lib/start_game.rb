@@ -22,7 +22,7 @@ class StartGame
     user = nil
      loop do
        puts "Enter p to play. Enter q to quit."
-       user = gets.chomp
+       user = gets.chomp.downcase
        break if user == "q" || user == "p"
      end
      exit if user == "q"
@@ -32,8 +32,42 @@ class StartGame
      end
   end
 
+  def generate_ai_ships(ship)
+    ship_coords = []
+    values = @player.cells.values
+    coord = values[rand(values.size)].coordinate
+    ship_coords << coord
+    (ship.length - 1).times do
+      ship_coords = ai_valid_coords(ship, ship_coords)
+    end
+    return ship_coords
+  end
+
+  def ai_valid_coords(ship, coord)
+    ship_coords = coord
+    if @ai.valid_coordinate?(ship_coords.last.next)
+      ship_coords << ship_coords.last.next
+     else
+       number_to_changing = ship.length - (ship.length - ship_coords.length)
+       ship_coords << ship_coords.last[0] + (ship_coords.last[1].to_i - number_to_changing).to_s
+    end
+    return ship_coords.sort!
+  end
+
   def computer_ship_place
-    # the actual complicated method.
+    generate_ships.each do |current_ship|
+      correct_placement = false
+      ship_coords = generate_ai_ships(current_ship)
+      while !correct_placement do
+        if @ai.valid_placement?(current_ship, ship_coords)
+           ship_coords.each { |coord| @ai.cells[coord].place_ship(current_ship) }
+           correct_placement = true
+        else
+          return current_ship
+          ship_coords = generate_ai_ships(current_ship)
+        end
+      end
+   end
   end
 
   def player_ship_prompt
