@@ -8,6 +8,7 @@ describe ArtificialIntelligence do
   let(:board) {Board.new}
   let(:ai) {ArtificialIntelligence.new(board.cells)}
   let(:ship) {Ship.new("cruiser", 3)}
+  let(:cell) {Cell.new}
 
   it "should exist" do
     expect(ai).to be_kind_of(ArtificialIntelligence)
@@ -99,7 +100,7 @@ it "should return true if move was move_succesful" do
     expect(ai.right_move).to eq(ai.cells["A2"])
   end
 
-  it "should return the next right cell to hit" do
+  it "should return the next left cell to hit" do
     ai.hunt = ai.cells["A3"]
     ai.moving_direction = "left"
     ai.previous_hits = [ai.cells["A3"]]
@@ -107,7 +108,7 @@ it "should return true if move was move_succesful" do
     expect(ai.left_move).to eq(ai.cells["A2"])
   end
 
-  it "should return the next right cell to hit" do
+  it "should return the next up cell to hit" do
     ai.hunt = ai.cells["C1"]
     ai.moving_direction = "up"
     ai.previous_hits = [ai.cells["C1"]]
@@ -115,11 +116,21 @@ it "should return true if move was move_succesful" do
     expect(ai.up_move).to eq(ai.cells["B1"])
   end
 
-  it "should return the next right cell to hit" do
+  it "should return the next down cell to hit" do
     ai.hunt = ai.cells["A1"]
     ai.moving_direction = "up"
     ai.previous_hits = [ai.cells["A1"]]
 
     expect(ai.down_move).to eq(ai.cells["B1"])
+  end
+
+  it "should setup the next shot" do
+    ai.hunt = ai.cells["A1"]
+    board.place(ship, ["A1","A2","A3"])
+    ai.cells["A1"].fire_upon
+    ai.cells["A2"].fire_upon
+    ai.hit_setup(ai.cells["A3"])
+
+    expect(ai.move_succesful).to eq(true)
   end
 end
