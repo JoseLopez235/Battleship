@@ -71,4 +71,55 @@ it "should return true if move was move_succesful" do
     expect(ai.move_succesful).to eq(false)
     expect(ai.destroy).to eq(true)
   end
+
+  it "should determine the next cell to hit" do
+    board.place(ship, ["A1","A2","A3"])
+    ai.hunt = ai.cells["A1"]
+    ai.surroundcells = [ai.cells["A2"], ai.cells["B1"]]
+    ai.determine_direction(ai.cells["A1"])
+
+    expect(ai.surroundcells).to eq([ai.cells["A2"]])
+  end
+
+  it "should return the next hit that was fired upon" do
+    board.place(ship, ["A1","A2","A3"])
+    ai.surroundcells = [ai.cells["A2"], ai.cells["B1"]]
+    ai.hunt = ai.cells["A1"]
+    ai.moving_direction = "right"
+    ai.previous_hits = [ai.cells["A1"]]
+
+    expect(ai.calc_next_hit).to eq(ai.cells["A2"])
+  end
+
+  it "should return the next right cell to hit" do
+    ai.hunt = ai.cells["A1"]
+    ai.moving_direction = "right"
+    ai.previous_hits = [ai.cells["A1"]]
+
+    expect(ai.right_move).to eq(ai.cells["A2"])
+  end
+
+  it "should return the next right cell to hit" do
+    ai.hunt = ai.cells["A3"]
+    ai.moving_direction = "left"
+    ai.previous_hits = [ai.cells["A3"]]
+
+    expect(ai.left_move).to eq(ai.cells["A2"])
+  end
+
+  it "should return the next right cell to hit" do
+    ai.hunt = ai.cells["C1"]
+    ai.moving_direction = "up"
+    ai.previous_hits = [ai.cells["C1"]]
+
+    expect(ai.up_move).to eq(ai.cells["B1"])
+  end
+
+  it "should return the next right cell to hit" do
+    ai.hunt = ai.cells["A1"]
+    ai.moving_direction = "up"
+    ai.previous_hits = [ai.cells["A1"]]
+
+    expect(ai.down_move).to eq(ai.cells["B1"])
+  end
 end
