@@ -8,6 +8,7 @@ describe ArtificialIntelligence do
   let(:board) {Board.new}
   let(:ai) {ArtificialIntelligence.new(board.cells)}
   let(:ship) {Ship.new("cruiser", 3)}
+  let(:cell) {Cell.new}
 
   it "should exist" do
     expect(ai).to be_kind_of(ArtificialIntelligence)
@@ -37,5 +38,10 @@ it "should return true if move was move_succesful" do
     ai.logical_strikes
 
     expect(ai.surroundcells.include?("B1")).to eq(false)
+  end
+
+  it "should setup the next shot" do
+    ai.reset_vars
+    expect(ai).to receive(:hit_setup).and_return(reset_vars)
   end
 end
