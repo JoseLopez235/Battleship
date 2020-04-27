@@ -43,7 +43,7 @@ describe StartGame do
     expect(start_game.player.cells["A3"].ship).to eq(ship_one)
   end
 
-  xit "should return true if coord is valid and not been fired upon" do
+  it "should return true if coord is valid and not been fired upon" do
     start_game.player.cells["A1"].place_ship(ship_one)
     start_game.player.cells["B1"].place_ship(ship_one)
     start_game.player.cells["A1"].fire_upon
@@ -126,7 +126,7 @@ describe StartGame do
     expect(start_game.ai_turn).to eq("I Won!")
   end
 
-  it "should place ships into valid cells on the board" do
+  xit "should place ships into valid cells on the board" do
     allow(start_game).to receive(:rand) {6}
     start_game.computer_ship_place
 

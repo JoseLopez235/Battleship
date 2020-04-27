@@ -10,11 +10,11 @@ class StartGame
       2 => "submarine",
       3 => "cruiser",
     }
-    main_menu
-    @player_attacks = []
+    @player_used_attacks = []
     @ai_attacks = []
     @player_ship_counter = 0
     @ai_ship_counter = 0
+    main_menu
   end
 
   def main_menu
@@ -80,6 +80,7 @@ class StartGame
       system "clear"
     end
     @player.board_render(@player.cells, true)
+    system "clear"
     player_turn
   end
 
@@ -90,7 +91,7 @@ class StartGame
   end
 
   def player_ship_input(ship)
-    coords = gets.chomp.split(" ")
+    coords = gets.chomp.upcase.split(" ")
     if valid_sequence?(ship, coords)
       player_ship_placement(ship, coords)
     else
@@ -114,18 +115,24 @@ class StartGame
 
 
   def player_turn
-    attack_coord = gets.chomp
-    validate_hit?(attack_coord) ? player_attack(attack_coord) : player_turn
+    puts "Make your attack!"
+    @ai.board_render(@ai.cells)
+    @player.board_render(@player.cells)
+    attack_coord = gets.chomp.upcase
+    return validate_hit?(attack_coord) ? player_attack(attack_coord) : player_turn
   end
 
   def player_attack(coord)
     @ai.cells[coord].fire_upon
-    @player_attacks << coord
+    @player_used_attacks << coord
     player_display_info(coord)
-    @ai_ship_counter += 1 if @ai.cells[coord].ship.sunk?
-    if @ai_ship_counter == generate_ships.count
+    if !@ai.cells[coord].empty?
+      @ai_ship_counter += 1 if @ai.cells[coord].ship.sunk?
+    end
+    if @ai_ship_counter == @name_of_ships.length
       puts "You Won!"
     else
+      system "clear"
       ai_turn
     end
   end
@@ -141,10 +148,13 @@ class StartGame
   def ai_turn
     values = @player.cells.values
     coord = values[rand(values.size)].coordinate
+    return ai_turn if ai_validate_hit?(coord)
     @player.cells[coord].fire_upon
     @ai_attacks << coord
     ai_display_info(coord)
-    @player_ship_counter += 1 if @player.cells[coord].ship.sunk?
+    if !@ai.cells[coord].empty?
+      @ai_ship_counter += 1 if @ai.cells[coord].ship.sunk?
+    end
     if @player_ship_counter == generate_ships.count
       puts "I Won!"
     else
@@ -154,9 +164,14 @@ class StartGame
 
   def validate_hit?(coord)
     player = @player.cells[coord]
+    return false if !@player.cells.include?(coord)
+    return false if @player_used_attacks.include?(player)
+    return player.fired_upon? ? false : true
+  end
+
+  def ai_validate_hit?(coord)
     ai = @ai.cells[coord]
-    return false if !@ai.cells.include?(coord) || !@player.cells.include?(coord)
-    return false if @ai_attacks.include?(coord) || @player_attacks.include?(coord)
-    return player.fired_upon? || ai.fired_upon? ? false : true
+    return false if @ai_attacks.include?(ai)
+    ai.fired_upon? ? false : true
   end
 end
