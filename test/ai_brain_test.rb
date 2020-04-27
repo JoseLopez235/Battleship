@@ -38,4 +38,37 @@ it "should return true if move was move_succesful" do
 
     expect(ai.surroundcells.include?("B1")).to eq(false)
   end
+
+  it "should return the the array with out the cell if  moving a certain directions" do
+    board.place(ship, ["A1","A2","A3"])
+    ai.hunt = ai.cells["A1"]
+    ai.surroundcells = [ai.cells["A2"], ai.cells["B1"]]
+    ai.probable_coord(0, ai.cells["A2"] )
+
+    expect(ai.surroundcells.include?("B1")).to eq(false)
+  end
+
+  it "should return opposite direction of the current hit" do
+    ai.moving_direction = "up"
+    ai.miss_hit
+
+    expect(ai.moving_direction).to eq("down")
+    expect(ai.move_succesful).to eq(false)
+  end
+
+  it "should return the corresponding direction" do
+    expect(ai).to receive(:left_move)
+
+    ai.moving_direction = "left"
+    ai.determine_next_hit
+  end
+
+  it "should return all variables to there original state" do
+    ai.reset_vars
+
+    expect(ai.moving_direction).to eq(nil)
+    expect(ai.previous_hits).to eq([])
+    expect(ai.move_succesful).to eq(false)
+    expect(ai.destroy).to eq(true)
+  end
 end

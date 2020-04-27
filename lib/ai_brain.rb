@@ -3,7 +3,7 @@ require_relative 'ship.rb'
 require_relative 'cell.rb'
 
 class ArtificialIntelligence
-  attr_accessor :hunt, :unused_cells, :cells, :move_succesful, :surroundcells
+  attr_accessor :hunt, :unused_cells, :cells, :move_succesful, :surroundcells, :moving_direction, :previous_hits, :destroy
   def initialize(cells)
     @cells = cells
     @hunt = nil
