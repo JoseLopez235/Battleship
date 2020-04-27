@@ -1,15 +1,9 @@
-=begin
-At this point in A.I were tring to create the smart approach for the
-the A.I to play against the user. Right now we were able to separate the
-surrounding coordinates with the ship. We need to make sure if the ship was sunk
-immediately.
-=end
 require_relative 'board.rb'
 require_relative 'ship.rb'
 require_relative 'cell.rb'
 
 class ArtificialIntelligence
-  attr_accessor :hunt, :unused_cells, :cells
+  attr_accessor :hunt, :unused_cells, :cells, :move_succesful, :surroundcells
   def initialize(cells)
     @cells = cells
     @hunt = nil
