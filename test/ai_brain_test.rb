@@ -38,4 +38,32 @@ it "should return true if move was move_succesful" do
 
     expect(ai.surroundcells.include?("B1")).to eq(false)
   end
+
+  it "should determin the next cell to hit" do
+    board.place(ship, ["A1","A2","A3"])
+    ai.hunt = ai.cells["A1"]
+    ai.surroundcells = [ai.cells["A2"], ai.cells["B1"]]
+    ai.determine_direction(ai.cells["A1"])
+
+    expect(ai.surroundcells).to eq([ai.cells["A2"]])
+  end
+
+  it "should calculate the next hit until the ship is sunk" do
+    board.place(ship, ["A1","A2","A3"])
+    ai.surroundcells = [ai.cells["A2"], ai.cells["B1"]]
+    ai.hunt = ai.cells["A1"]
+    ai.moving_direction = "right"
+    ai.previous_hits = [ai.cells["A1"]]
+
+    expect(ai.calc_next_hit).to eq(ai.cells["A2"])
+  end
+
+  it "should return the next right cell to hit" do
+    board.place(ship, ["A1","A2","A3"])
+    ai.hunt = ai.cells["A1"]
+    ai.moving_direction = "right"
+    ai.previous_hits = [ai.cells["A1"]]
+
+    expect(ai.left_move).to eq(ai.cells["A2"])
+  end
 end
